@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using UI.Cart2.Models;
+using Entities.Cart;
+using BusinessLogic.Cart;
 
 namespace UI.Cart2.Controllers
 {
@@ -57,7 +59,9 @@ namespace UI.Cart2.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+
             ViewBag.ReturnUrl = returnUrl;
+
             return View();
         }
 
