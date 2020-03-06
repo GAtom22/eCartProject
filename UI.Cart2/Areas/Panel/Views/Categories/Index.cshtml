@@ -1,8 +1,9 @@
-﻿@model IEnumerable<Entities.Cart.Product>
+﻿@model IEnumerable<Entities.Cart.Category>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Panel/Views/Shared/_Layout.cshtml";
 }
+
 
 <!-- Main content -->
 <section class="content">
@@ -20,50 +21,23 @@
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Category.CategoryName)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.ProductName)
+                                    @Html.DisplayNameFor(model => model.CategoryName)
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.Description)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.ImagePath)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.UnitPrice)
                                 </th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-
-
                             @foreach (var item in Model)
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Category.CategoryName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.ProductName)
+                                        @Html.DisplayFor(modelItem => item.CategoryName)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Description)
-                                    </td>
-                                    <td>
-                                        @if (!String.IsNullOrEmpty(item.ImagePath))
-                                        {
-                                            <img src="@Url.Content(item.ImagePath)" alt="Image" style="width:100px;height:auto" />
-                                        }
-                                        else
-                                        {
-                                            @Html.DisplayFor(modelItem => item.ImagePath)
-                                        }
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.UnitPrice)
                                     </td>
                                     <td>
                                         <i class="fas fa-edit"></i>
@@ -76,6 +50,7 @@
                                 </tr>
                             }
                         </tbody>
+
                     </table>
                 </div>
                 <!-- /.card-body -->

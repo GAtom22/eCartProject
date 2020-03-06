@@ -1,124 +1,122 @@
-﻿using BusinessLogic.Cart;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Web;
+using System.Net;
 using System.Web.Mvc;
 using Entities.Cart;
+using UI.Cart2.Models;
+using BusinessLogic.Cart;
+
 
 namespace UI.Cart2.Areas.Panel.Controllers
 {
-    public class ProductsController : Controller
+    public class CategoriesController : Controller
     {
         private ICategoriesBL _categoriesbl;
-        private IProductsBL _productsbl;
-        public ProductsController()
+        public CategoriesController()
         {
             this._categoriesbl = new CategoriesBL();
-            this._productsbl = new ProductsBL();
         }
 
-        // GET: Panel/Products
+        // GET: Panel/Categories
         public ActionResult Index()
         {
-            var products = this._productsbl.GetAll();// db.Products.Include(p => p.Categories);
-            return View(products.ToList());
+            return View(this._categoriesbl.GetAll());
         }
 
-        // GET: Panel/Products/Details/5
+        // GET: Panel/Categories/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product products = this._productsbl.GetById(id.Value);
-            if (products == null)
+            Category categories = this._categoriesbl.GetById(id.Value);
+            if (categories == null)
             {
                 return HttpNotFound();
             }
-            return View(products);
+            return View(categories);
         }
 
-        // GET: Panel/Products/Create
+        // GET: Panel/Categories/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryID = new SelectList(this._categoriesbl.GetAll(), "CategoryID", "CategoryName");
             return View();
         }
 
-        // POST: Panel/Products/Create
+        // POST: Panel/Categories/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,ProductName,Description,ImagePath,UnitPrice,CategoryID")] Product products)
+        public ActionResult Create([Bind(Include = "CategoryID,CategoryName,Description")] Category categories)
         {
             if (ModelState.IsValid)
             {
-                this._productsbl.Create(products);
+                this._categoriesbl.Create(categories);
+
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryID = new SelectList(this._categoriesbl.GetAll(), "CategoryID", "CategoryName", products.CategoryID);
-            return View(products);
+            return View(categories);
         }
 
-        // GET: Panel/Products/Edit/5
+        // GET: Panel/Categories/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product products = this._productsbl.GetById(id.Value);
-            if (products == null)
+            Category categories = this._categoriesbl.GetById(id.Value);
+            if (categories == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryID = new SelectList(this._categoriesbl.GetAll(), "CategoryID", "CategoryName", products.CategoryID);
-            return View(products);
+            return View(categories);
         }
 
-        // POST: Panel/Products/Edit/5
+        // POST: Panel/Categories/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,ProductName,Description,ImagePath,UnitPrice,CategoryID")] Product products)
+        public ActionResult Edit([Bind(Include = "CategoryID,CategoryName,Description")] Category categories)
         {
             if (ModelState.IsValid)
             {
-                this._productsbl.Update(products);
+                this._categoriesbl.Update(categories);
+
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryID = new SelectList(this._categoriesbl.GetAll(), "CategoryID", "CategoryName", products.CategoryID);
-            return View(products);
+            return View(categories);
         }
 
-        // GET: Panel/Products/Delete/5
+        // GET: Panel/Categories/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product products = this._productsbl.GetById(id.Value);
-            if (products == null)
+            Category categories = this._categoriesbl.GetById(id.Value);
+            if (categories == null)
             {
                 return HttpNotFound();
             }
-            return View(products);
+            return View(categories);
         }
 
-        // POST: Panel/Products/Delete/5
+        // POST: Panel/Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product products = this._productsbl.GetById(id);
-            this._productsbl.Delete(products);
+            Category categories = this._categoriesbl.GetById(id);
+            this._categoriesbl.Delete(categories);
+
             return RedirectToAction("Index");
         }
 
