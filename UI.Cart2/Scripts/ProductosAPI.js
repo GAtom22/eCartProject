@@ -1,5 +1,13 @@
 ﻿
- var uri = 'api/productsAPI';
+var uri = 'api/productsAPI';
+var CartUri = 'api/CartItemsAPI';
+
+if (sessionStorage["ItemsNum"]==null) {
+    sessionStorage["ItemsNum"] == 0;
+}
+if (sessionStorage["CartId"] == null) {
+    sessionStorage["CartId"] == 1;
+}
 
     $(document).ready(function () {
         // Send an AJAX request
@@ -14,7 +22,7 @@
 });
 
     function formatItem(item) {
-      return item.ProductName + ': $' + item.Price;
+      return item.ProductID + " - " + item.ProductName + ': $' + item.UnitPrice;
   }
 
     function find() {
@@ -26,4 +34,47 @@
           .fail(function (jqXHR, textStatus, err) {
         $('#product').text('Error: ' + err);
   });
+}
+
+
+function addToCart() {
+    sessionStorage["ItemsNum"] = Number(sessionStorage["ItemsNum"]) + 1;
+
+    //Check if item already exist in cartItems
+    var id = $('#prodId').val();
+    $.getJSON(CartUri + '/' + id)
+        .done(function (data) {
+            data.Quantity += 1;
+            updateCartItem(data);
+        })
+        .fail(function (jqXHR, textStatus, err) {
+            var item = {
+                ItemId: sessionStorage["ItemsNum"].toString(),
+                CartId: sessionStorage["CartId"].toString(),
+                Quantity: 1,
+                DateCreated: new Date(),
+                ProductId: id
+            }
+            $.post(CartUri + '/' + item)
+                .done(() => {
+                    console.log("item added")
+                })
+                .fail(() => {
+                    sessionStorage["ItemsNum"] = Number(sessionStorage["ItemsNum"]) - 1;
+                    console.log("failed")
+                })
+             });
+}
+
+function updateCartItem(item) {
+    $.ajax({
+        url: CartUri + "/" + item,
+        type: 'PUT',
+        success: function (result) {
+            console.log("updated!")
+        },
+        fail: function (err) {
+            console.error(err);
+        }
+    });
 }

@@ -30,10 +30,10 @@ namespace UI.Cart2.Controllers
 
         // GET api/CartItemsAPI/id
         [System.Web.Http.HttpGet]
-        public IHttpActionResult GetProduct(string id)
+        public IHttpActionResult GetProduct(int id)
         {
             var cartItems = this._cartItembl.GetAll();
-            var item = cartItems.FirstOrDefault((p) => p.ItemId == id);
+            var item = cartItems.FirstOrDefault((p) => p.ProductId == id);
             if (item == null)
             {
                 return NotFound();
