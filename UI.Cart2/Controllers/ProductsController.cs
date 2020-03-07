@@ -3,14 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BusinessLogic.Cart;
+using Entities.Cart;
 
 namespace UI.Cart2.Controllers
 {
     public class ProductsController : Controller
     {
-        // GET: Products
+        private ICategoriesBL _categoriesbl;
+        private IProductsBL _productsbl;
+        public ProductsController()
+        {
+            this._categoriesbl = new CategoriesBL();
+            this._productsbl = new ProductsBL();
+        }
+
+        // GET: /Products
         public ActionResult Index()
         {
+            
             return View();
         }
 

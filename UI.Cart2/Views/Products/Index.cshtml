@@ -1,16 +1,9 @@
-﻿@{
+﻿
+@{
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutCart.cshtml";
-    ViewBag.Title = "Home Page";
 }
 
-<div class="container" style="width:100vw; height: 100vh;">
-    <div class="jumbotron col-6 " style="margin: auto;">
-        <h1>eCommerce Project</h1>
-        <p class="lead">Example of eCommerce implementation in .NET Framework MVC</p>
-        <p><a href=@Url.Action("Index","Products") class="btn btn-primary btn-lg">Go Shopping</a></p>
-    </div>
-</div>
-<br />
 <div>
     <h2>All Products</h2>
     <ul id="products" />
