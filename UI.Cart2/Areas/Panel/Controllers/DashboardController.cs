@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace UI.Cart2.Areas.Panel.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class DashboardController : Controller
     {
         // GET: Panel/Dashboard

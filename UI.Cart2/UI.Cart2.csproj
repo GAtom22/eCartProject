@@ -46,6 +46,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -184,6 +187,8 @@
     <Compile Include="Areas\Panel\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Panel\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Panel\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\Panel\Controllers\RolesController.cs" />
+    <Compile Include="Areas\Panel\Controllers\UsersController.cs" />
     <Compile Include="Areas\Panel\PanelAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApiServicesController.cs" />
@@ -191,8 +196,9 @@
     <Compile Include="Controllers\CartItemsAPIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OurProductsController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\ProductsAPIController.cs" />
-    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -200,6 +206,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="PanelAreaRegistration.cs" />
+    <Compile Include="PayPalConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -233,6 +240,16 @@
     <Content Include="Areas\Panel\Views\Products\Delete.cshtml" />
     <Content Include="Areas\Panel\Views\Products\Details.cshtml" />
     <Content Include="Areas\Panel\Views\Products\Edit.cshtml" />
+    <Content Include="Areas\Panel\Views\Roles\Index.cshtml" />
+    <Content Include="Areas\Panel\Views\Roles\Details.cshtml" />
+    <Content Include="Areas\Panel\Views\Roles\Create.cshtml" />
+    <Content Include="Areas\Panel\Views\Roles\Edit.cshtml" />
+    <Content Include="Areas\Panel\Views\Roles\Delete.cshtml" />
+    <Content Include="Areas\Panel\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Panel\Views\Users\Details.cshtml" />
+    <Content Include="Areas\Panel\Views\Users\Create.cshtml" />
+    <Content Include="Areas\Panel\Views\Users\Edit.cshtml" />
+    <Content Include="Areas\Panel\Views\Users\Delete.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -280,12 +297,18 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_LayoutCart.cshtml" />
-    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\OurProducts\Index.cshtml" />
+    <Content Include="Views\Payment\FailureView.cshtml" />
+    <Content Include="Views\Payment\SuccessView.cshtml" />
+    <Content Include="Views\OurProducts\Shirts.cshtml" />
+    <Content Include="Views\OurProducts\Pants.cshtml" />
+    <Content Include="Views\OurProducts\Shoes.cshtml" />
+    <Content Include="Views\OurProducts\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Panel\Models\" />
-    <Folder Include="Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

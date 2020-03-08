@@ -9,6 +9,7 @@ using Entities.Cart;
 
 namespace UI.Cart2.Areas.Panel.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductsController : Controller
     {
         private ICategoriesBL _categoriesbl;
@@ -55,10 +56,14 @@ namespace UI.Cart2.Areas.Panel.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProductID,ProductName,Description,ImagePath,UnitPrice,CategoryID")] Product products)
         {
+            var rnd = new Random();
+            int num = rnd.Next(1, 1000);
+            products.ImagePath = "https://i.picsum.photos/id/" + num + "/300/300.jpg";
+             
             if (ModelState.IsValid)
             {
                 this._productsbl.Create(products);
-                return RedirectToAction("Index");
+                return RedirectToAction("../../Admin/Products");
             }
 
             ViewBag.CategoryID = new SelectList(this._categoriesbl.GetAll(), "CategoryID", "CategoryName", products.CategoryID);
@@ -91,7 +96,7 @@ namespace UI.Cart2.Areas.Panel.Controllers
             if (ModelState.IsValid)
             {
                 this._productsbl.Update(products);
-                return RedirectToAction("Index");
+                return RedirectToAction("../../Admin/Products");
             }
             ViewBag.CategoryID = new SelectList(this._categoriesbl.GetAll(), "CategoryID", "CategoryName", products.CategoryID);
             return View(products);
@@ -119,7 +124,7 @@ namespace UI.Cart2.Areas.Panel.Controllers
         {
             Product products = this._productsbl.GetById(id);
             this._productsbl.Delete(products);
-            return RedirectToAction("Index");
+            return RedirectToAction("../../Admin/Products");
         }
 
         //protected override void Dispose(bool disposing)

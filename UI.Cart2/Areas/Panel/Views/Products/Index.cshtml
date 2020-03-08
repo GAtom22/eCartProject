@@ -10,7 +10,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Listado  | @Html.ActionLink("Nueva ", "Create")</h3>
+                    <h3 class="card-title">Listado  | <a href="/Admin/Products/Create">Nueva</a></h3>
                     <br />
 
                 </div>
@@ -67,11 +67,14 @@
                                     </td>
                                     <td>
                                         <i class="fas fa-edit"></i>
-                                        @Html.ActionLink("Editar", "Edit", new { id = item.CategoryID }) |
+                                        <a href="/Admin/Products/Edit/@item.ProductID">Editar</a>
+                                        |
                                         <i class="far fa-eye"></i>
-                                        @Html.ActionLink("Detalle", "Details", new { id = item.CategoryID }) |
+                                        <a href="/Admin/Products/Details/@item.ProductID">Detalles</a>
+                                         |
                                         <i class="fas fa-trash-alt"></i>
-                                        @Html.ActionLink("Eliminar", "Delete", new { id = item.CategoryID })
+                                        <a href="/Admin/Products/Delete/@item.ProductID">Eliminar</a>
+                                       
                                     </td>
                                 </tr>
                             }

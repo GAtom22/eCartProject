@@ -1,24 +1,20 @@
 ﻿
-var uri = 'api/productsAPI';
+var uri = 'api/ProductsAPI';
 var CartUri = 'api/CartItemsAPI';
 
-if (sessionStorage["ItemsNum"]==null) {
-    sessionStorage["ItemsNum"] == 0;
-}
-if (sessionStorage["CartId"] == null) {
-    sessionStorage["CartId"] == 1;
-}
 
     $(document).ready(function () {
         // Send an AJAX request
         $.getJSON(uri)
-            .done(function (data) {
+            .done(function (data) { 
                 // On success, 'data' contains a list of products.
-                $.each(data, function (key, item) {
+                $.each(data.results, function (key, item) {
                     // Add a list item for the product.
                     $('<li>', { text: formatItem(item) }).appendTo($('#products'));
+                    
                 });
             });
+
 });
 
     function formatItem(item) {

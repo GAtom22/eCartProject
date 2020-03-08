@@ -19,8 +19,6 @@ namespace BusinessLogic.Cart
 
         public void Create(CartItem entity)
         {
-
-
             try
             {
                 this.repository.Create(entity);

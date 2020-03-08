@@ -1,13 +1,19 @@
-﻿@{
+﻿@model IEnumerable<Entities.Cart.Product>
+@{
     Layout = "~/Views/Shared/_LayoutCart.cshtml";
     ViewBag.Title = "Home Page";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h4>Hello @User.Identity.Name!</h4>
 }
 
 <div class="container" style="width:100vw; height: 100vh;">
     <div class="jumbotron col-6 " style="margin: auto;">
         <h1>eCommerce Project</h1>
         <p class="lead">Example of eCommerce implementation in .NET Framework MVC</p>
-        <p><a href=@Url.Action("Index","Products") class="btn btn-primary btn-lg">Go Shopping</a></p>
+        <p><a href="#products" class ="btn btn-primary btn-lg">Go Shopping</a></p>
     </div>
 </div>
 <br />
@@ -21,6 +27,39 @@
     <input type="button" value="Search" onclick="find();" />
     <p id="product" />
 </div>
+
+
+<div class="row" id="products">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h2>Our products <small>trend products</small></h2>
+        </div>
+    </div>
+</div>
+
+<div class="row product-container">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px;">
+            <div class="thumbnail product-item" style="height:300px;">
+                <a href="/OurProducts/Details/@item.ProductID">
+                    <img class="img-responsive" title="Click to view product detail" src=@item.ImagePath alt="Alternate Text" style="cursor:pointer;height:160px;width:100%;" />
+                </a>
+                <div class="caption">
+                    <h5>@item.ProductName</h5>
+                    <p>$@item.UnitPrice</p>
+
+                    @using (Html.BeginForm("AddToCart", "Cart", new { id = item.ProductID }, FormMethod.Post))
+                    {
+                        <button type="submit" class="pull-right">Add<i class="fa fa-shopping-cart"></i></button>
+                    }
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
 
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
 <script src="~/Scripts/ProductosAPI.js"></script>

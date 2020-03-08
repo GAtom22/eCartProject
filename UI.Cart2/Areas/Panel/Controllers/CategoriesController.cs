@@ -11,6 +11,7 @@ using BusinessLogic.Cart;
 
 namespace UI.Cart2.Areas.Panel.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CategoriesController : Controller
     {
         private ICategoriesBL _categoriesbl;
@@ -57,7 +58,7 @@ namespace UI.Cart2.Areas.Panel.Controllers
             {
                 this._categoriesbl.Create(categories);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("../../Admin/Categories");
             }
 
             return View(categories);
@@ -89,7 +90,7 @@ namespace UI.Cart2.Areas.Panel.Controllers
             {
                 this._categoriesbl.Update(categories);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("../../Admin/Categories");
             }
             return View(categories);
         }
@@ -117,7 +118,7 @@ namespace UI.Cart2.Areas.Panel.Controllers
             Category categories = this._categoriesbl.GetById(id);
             this._categoriesbl.Delete(categories);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("../../Admin/Categories");
         }
 
         //protected override void Dispose(bool disposing)

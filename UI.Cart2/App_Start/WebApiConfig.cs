@@ -7,9 +7,11 @@ namespace UI.Cart2
 {
     public static class WebApiConfig
     {
+
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            
 
             // Web API routes
             config.MapHttpAttributeRoutes();
@@ -19,6 +21,8 @@ namespace UI.Cart2
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+
         }
     }
 }

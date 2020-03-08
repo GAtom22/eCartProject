@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-//using BusinessLogic.Cart.ShoppingCart;
+using BusinessLogic.Cart;
+using Entities.Cart;
 
 namespace UI.Cart2.Controllers
 {
     public class HomeController : Controller
     {
+        private ICategoriesBL _categoriesbl;
+        private IProductsBL _productsbl;
+        public HomeController()
+        {
+            this._categoriesbl = new CategoriesBL();
+            this._productsbl = new ProductsBL();
+        }
         public ActionResult Index()
         {
 
-            //ShoppingCartActionsBL usersShoppingCart = new ShoppingCartActionsBL();
-
-            //string cartStr = string.Format("Cart ({0})", usersShoppingCart.GetCount());
-            //Session["NumItems"] = cartStr;
-               
-            return View();
+            var products = this._productsbl.GetAll();
+            return View(products.ToList());
         }
 
         public ActionResult About()

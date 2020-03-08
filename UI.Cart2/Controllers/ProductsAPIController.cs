@@ -17,25 +17,44 @@ namespace UI.Cart2.Controllers
         {
             this._categoriesbl = new CategoriesBL();
             this._productsbl = new ProductsBL();
+            
         }
-        
-        // GET api/ProductsAPI
-        public IEnumerable<Product> GetAllProducts()
+
+        //// GET api/ProductsAPI
+        public IHttpActionResult GetAllProducts()
         {
             var products = this._productsbl.GetAll();
-            return products;
+            List<ProdAPI> prodAPI = new List<ProdAPI>();
+
+            foreach (var item in products)
+            {
+                var _prodApi = new ProdAPI();
+                _prodApi.ProductID = item.ProductID;
+                _prodApi.ProductName = item.ProductName;
+                _prodApi.Description = item.Description;
+                _prodApi.UnitPrice = item.UnitPrice;
+                _prodApi.CategoryID = item.CategoryID;
+                prodAPI.Add(_prodApi);
+            }
+            return Ok(new { results = prodAPI });
+
         }
 
         // GET api/ProductsAPI/id
         public IHttpActionResult GetProduct(int id)
         {
-            var products = this._productsbl.GetAll();
-            var product = products.FirstOrDefault((p) => p.ProductID == id);
-            if (product == null)
+            var item = _productsbl.GetById(id);
+            var _prodApi = new ProdAPI();
+            _prodApi.ProductID = item.ProductID;
+            _prodApi.ProductName = item.ProductName;
+            _prodApi.Description = item.Description;
+            _prodApi.UnitPrice = item.UnitPrice;
+            _prodApi.CategoryID = item.CategoryID;
+            if (item == null)
             {
                 return NotFound();
             }
-            return Ok(product);
+            return Ok(_prodApi);
         }
 
         public IEnumerable<Product> GetProductsByCategory(string category)
@@ -45,11 +64,7 @@ namespace UI.Cart2.Controllers
                 (p) => string.Equals(p.Category.CategoryName, category,
                     StringComparison.OrdinalIgnoreCase));
         }
-        //// GET api/<controller>/5
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+       
 
         //// POST api/<controller>
         //public void Post([FromBody]string value)
@@ -65,5 +80,20 @@ namespace UI.Cart2.Controllers
         //public void Delete(int id)
         //{
         //}
+
+
+        public class ProdAPI
+        {
+            public int ProductID { get; set; }
+            public string ProductName { get; set; }
+            public string Description { get; set; }
+            public string ImagePath { get; set; }
+            public double? UnitPrice { get; set; }
+            public int? CategoryID { get; set; }
+        }
+
+
     }
+
+
 }

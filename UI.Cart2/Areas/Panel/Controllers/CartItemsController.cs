@@ -10,6 +10,7 @@ using BusinessLogic.Cart;
 
 namespace UI.Cart2.Areas.Panel.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CartItemsController : Controller
     {
         private ICartItemBL _cartItembl;
@@ -61,7 +62,7 @@ namespace UI.Cart2.Areas.Panel.Controllers
             if (ModelState.IsValid)
             {
                 this._cartItembl.Create(cartItem);
-                return RedirectToAction("Index");
+                return RedirectToAction("../../Admin/CartItems");
             }
 
             ViewBag.ProductId = new SelectList(this._productsbl.GetAll(), "ProductID", "ProductName", cartItem.ProductId);
@@ -94,7 +95,7 @@ namespace UI.Cart2.Areas.Panel.Controllers
             if (ModelState.IsValid)
             {
                 this._cartItembl.Update(cartItem);
-                return RedirectToAction("Index");
+                return RedirectToAction("../../Admin/CartItems");
             }
             ViewBag.ProductId = new SelectList(this._productsbl.GetAll(), "ProductID", "ProductName", cartItem.ProductId);
             return View(cartItem);
@@ -122,7 +123,7 @@ namespace UI.Cart2.Areas.Panel.Controllers
         {
             CartItem cartItem = this._cartItembl.GetById(id);
             this._cartItembl.Delete(cartItem);
-            return RedirectToAction("Index");
+            return RedirectToAction("../../Admin/CartItems");
         }
 
         //protected override void Dispose(bool disposing)

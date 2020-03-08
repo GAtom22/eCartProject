@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Entities.Cart.Product>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutCart.cshtml";
+}
+
+<div>
+    <h2>Pants Products</h2>
+    <ul id="products" />
+</div>
+<div>
+    <h2>Search by ID</h2>
+    <input type="text" id="prodId" size="5" />
+    <input type="button" value="Search" onclick="find();" />
+    <p id="product" />
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h2>Our products </h2>
+        </div>
+    </div>
+</div>
+
+<div class="row product-container">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px;">
+            <div class="thumbnail product-item" style="height:300px;">
+                <a href="/OurProducts/Details/@item.ProductID">
+                    <img class="img-responsive" title="Click to view product detail" src=@item.ImagePath alt="Alternate Text" style="cursor:pointer;height:160px;width:100%;" />
+                </a>
+                <div class="caption">
+                    <h5>@item.ProductName</h5>
+                    <p>$@item.UnitPrice</p>
+
+                    @using (Html.BeginForm("AddToCart", "Cart", new { id = item.ProductID }, FormMethod.Post))
+                    {
+                        <button type="submit" class="pull-right">Add<i class="fa fa-shopping-cart"></i></button>
+                    }
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+<script src="~/Scripts/ProductosAPI.js"></script>

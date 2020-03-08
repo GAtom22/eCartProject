@@ -8,10 +8,10 @@
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/panel")
 </head>
-<body class="hold-transition sidebar-mini layout-fixed" style="padding-top:0px;font-size:14px;">
+<body class="hold-transition sidebar-mini layout-fixed" style="padding-top:0px;font-size:14px;background-color:#D8E2D4;">
     <div class="wrapper">
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color:#abb1a1;">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -24,7 +24,7 @@
                     <a href=@Url.Action("Contact", "Home") class="nav-link">Contact</a>       
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href=@Url.Action("Index", "Products") class="nav-link">Products</a>
+                    <a href=@Url.Action("Index", "OurProducts") class="nav-link">Products</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href=@Url.Action("Index", "Cart") class="nav-link">Shopping Cart</a>
@@ -36,75 +36,95 @@
             <ul class="navbar-nav ml-auto">
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href=@Url.Action("Index", "Cart")>
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="badge badge-danger navbar-badge">@Session["NumItems"]</span>
+                    <a class="nav-link" href=@Url.Action("Index", "Cart")>
+                        <i class="fas fa-shopping-cart"><span class="right badge badge-danger">@Session["itemsNum"]</span></i>
                     </a>
                     @*<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="~/Img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Brad Diesel
-                                        <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">Call me whenever you can...</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="~/Img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        John Pierce
-                                        <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">I got your message bro</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="~/Img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Nora Silvester
-                                        <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">The subject goes here</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href=@Url.Action("Index", "Cart") class="dropdown-item dropdown-footer">Go to Shopping Cart</a>
-                    </div>*@
+                <a href="#" class="dropdown-item">
+                    <!-- Message Start -->
+                    <div class="media">
+                        <img src="~/Img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                        <div class="media-body">
+                            <h3 class="dropdown-item-title">
+                                Brad Diesel
+                                <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                            </h3>
+                            <p class="text-sm">Call me whenever you can...</p>
+                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                        </div>
+                    </div>
+                    <!-- Message End -->
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <!-- Message Start -->
+                    <div class="media">
+                        <img src="~/Img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                        <div class="media-body">
+                            <h3 class="dropdown-item-title">
+                                John Pierce
+                                <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                            </h3>
+                            <p class="text-sm">I got your message bro</p>
+                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                        </div>
+                    </div>
+                    <!-- Message End -->
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <!-- Message Start -->
+                    <div class="media">
+                        <img src="~/Img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                        <div class="media-body">
+                            <h3 class="dropdown-item-title">
+                                Nora Silvester
+                                <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                            </h3>
+                            <p class="text-sm">The subject goes here</p>
+                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                        </div>
+                    </div>
+                    <!-- Message End -->
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href=@Url.Action("Index", "Cart") class="dropdown-item dropdown-footer">Go to Shopping Cart</a>
+            </div>*@
                 </li>
                 <!-- Notifications Dropdown Menu -->
-                
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href=@Url.Action("Login", "Account")>
-                        Login
-                        <i class="fas fa-sign-in-alt"></i>
-                    </a>
-                </li>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    
+                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post))
+                    {
+                        <li class="nav-item">
+                            <button type="submit" class="nav-link" data-slide="true" style="border:none; background-color:transparent;">
+                                Logout
+                                <i class="fas fa-sign-out-alt"></i>
+                            </button>
+                            @*<a  type="submit" class="nav-link" data-widget="control-sidebar" data-slide="true" >
+                                Logout
+                                <i class="fas fa-sign-out-alt"></i>
+                            </a>*@
+                        </li>
+                    }
+
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href=@Url.Action("Login", "Account")>
+                            Login
+                            <i class="fas fa-sign-in-alt"></i>
+                        </a>
+                    </li>
+                }
             </ul>
         </nav>
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:#3C4652;">
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
                 <img src="~/Img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
@@ -139,19 +159,19 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href=@Url.Action("Index", "Products") class="nav-link active">
+                                    <a href=@Url.Action("Shoes", "OurProducts") class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Shoes</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href=@Url.Action("Index", "Products") class="nav-link">
+                                    <a href=@Url.Action("Pants", "OurProducts") class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Pants</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href=@Url.Action("Index", "Products") class="nav-link">
+                                    <a href=@Url.Action("Shirts", "OurProducts") class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Shirts</p>
                                     </a>
@@ -663,7 +683,7 @@
     <!-- ./wrapper -->
 
 
-    <div class="container body-content">
+    <div class="container body-content" style="margin-left:160px;">
         @RenderBody()
         <hr />
         <footer>

@@ -6,13 +6,14 @@ using System.Web.Mvc;
 using BusinessLogic.Cart;
 using Entities.Cart;
 
+
 namespace UI.Cart2.Controllers
 {
-    public class ProductsController : Controller
+    public class OurProductsController : Controller
     {
         private ICategoriesBL _categoriesbl;
         private IProductsBL _productsbl;
-        public ProductsController()
+        public OurProductsController()
         {
             this._categoriesbl = new CategoriesBL();
             this._productsbl = new ProductsBL();
@@ -21,14 +22,37 @@ namespace UI.Cart2.Controllers
         // GET: /Products
         public ActionResult Index()
         {
-            
-            return View();
+            var products = this._productsbl.GetAll();
+            return View(products.ToList());
+        }
+
+
+        // GET: /Products/Shoes
+        public ActionResult Shoes()
+        {
+            var products = this._productsbl.GetAll().Where(p => p.Category.CategoryName == "Shoes");
+            return View(products.ToList());
+        }
+
+        // GET: /Products/Shirts
+        public ActionResult Shirts()
+        {
+            var products = this._productsbl.GetAll().Where(p => p.Category.CategoryName == "Shirts");
+            return View(products.ToList());
+        }
+
+        // GET: /Products/Pants
+        public ActionResult Pants()
+        {
+            var products = this._productsbl.GetAll().Where(p => p.Category.CategoryName == "Pants");
+            return View(products.ToList());
         }
 
         // GET: Products/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var product = _productsbl.GetById(id);
+            return View(product);
         }
 
         // GET: Products/Create
